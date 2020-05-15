@@ -13,7 +13,7 @@ function getRecipes() {
 function getShoppingList(recipe_id) {
 
     
-    return db.select("unit_of_measurement", "quantity","ingredients.id")
+    return db.select("unit_of_measurement", "quantity","ingredients.name")
         .from("recipes_ingredients")
         .where({recipe: recipe_id})
         .join("ingredients","ingredients.id","=","recipes_ingredients.ingredient")

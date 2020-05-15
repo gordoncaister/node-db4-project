@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
         });
   });
 
-  router.get('/:id/list', (req, res) => {
+  router.get('/:id/shoppinglist', (req, res) => {
 
     console.log("list")
     Recipes.getShoppingList(req.params.id)
@@ -29,7 +29,7 @@ router.get('/', (req, res) => {
         });
   });
 
-  router.get('/:id/steps', (req, res) => {
+  router.get('/:id/instructions', (req, res) => {
 
     console.log("steps")
     Recipes.getInstructions(req.params.id)
