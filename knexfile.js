@@ -4,6 +4,7 @@ module.exports = {
 
   development: {
     client: 'sqlite3',
+    useNullAsDefault: true,
     connection: {
       filename: './data/recipe_book.sqlite3'
     },migrations: {
@@ -36,19 +37,31 @@ module.exports = {
   },
 
   production: {
-    client: 'postgresql',
+    client: 'pg',
     connection: {
-      database: 'projects',
-      user:     'postgres',
+      database: 'Projects',
+      user:     'Gordon',
       password: '0n0mat0p0eia'
+    },connection: {
+      filename: './data/recipe_book.sqlite3'
+    },migrations: {
+      directory: './data/migrations'
+    },
+    seeds: {
+      directory: './data/seeds'
     },
     pool: {
-      min: 2,
-      max: 10
-    },
-    migrations: {
-      tableName: 'knex_migrations'
+      afterCreate: (conn,done)=>{
+        conn.run("PRAGMA foreign_keys = ON",done);
+      }
     }
+    // pool: {
+    //   min: 2,
+    //   max: 10
+    // },
+    // migrations: {
+    //   tableName: 'knex_migrations'
+    // }
   }
 
 };
