@@ -29,4 +29,17 @@ router.get('/', (req, res) => {
         });
   });
 
+  router.get('/:id/steps', (req, res) => {
+
+    console.log("steps")
+    Recipes.getInstructions(req.params.id)
+        .then(instructions => {
+            res.json(instructions);
+        })
+        .catch(err => {
+            res.status(500).json({ message: 'Failed to get instructions' });
+        });
+  });
+
+
 module.exports = router;

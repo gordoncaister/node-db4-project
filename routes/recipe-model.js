@@ -11,19 +11,18 @@ function getRecipes() {
 }
 //should return a list of all ingredients and quantities for a given recipe
 function getShoppingList(recipe_id) {
-    console.log("here")
-    console.log(recipe_id)
-    console.log(db.select("recipes_ingredients.unit_of_measurement", "recipes_ingredients.quantity","ingredients.name")
-    .from("recipes_ingredients")
-    .where({recipe: recipe_id})
-    .join("ingredients","recipes_ingredients.ingredients","=","ingredients.id"))
-    return db.select("unit_of_measurement", "quantity","ingredients.name")
+
+    
+    return db.select("unit_of_measurement", "quantity","ingredients.id")
         .from("recipes_ingredients")
         .where({recipe: recipe_id})
-        .join("ingredients","ingredients.id","=","recipes_ingredients.ingredients")
+        .join("ingredients","ingredients.id","=","recipes_ingredients.ingredient")
 }
 
 //should return a list of step by step instructions for preparing a recipe
 function getInstructions(recipe_id) {
-
+    return db.select("steps.number","steps.description")
+        .from("steps")
+        .where({recipe: recipe_id})
+        .orderBy("steps.number","asc")
 }
